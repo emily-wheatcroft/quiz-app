@@ -1,35 +1,56 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
 function Settings() {
-  const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState(null);
-  const [questionCategory, setQuestionCategory] = useState("");
-  const [questionDifficulty, setQuestionDifficulty] = useState("");
-  const [questionType, setQuestionType] = useState("");
+
+  const loading = useSelector(state => state.options.loading)
+
+  const questionCategory = useSelector(state => state.options.question_category)
+  const questionDifficulty = useSelector(state => state.options.question_difficulty)
+  const questionType = useSelector(state => state.options.question_type)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const apiUrl = `https://opentdb.com/api_category.php`;
 
-    setLoading(true);
+    handleLoadingChange(true);
 
     fetch(apiUrl)
       .then((res) => res.json())
       .then((response) => {
-        setLoading(false);
+        handleLoadingChange(false);
         setOptions(response.trivia_categories);
       });
   }, [setOptions]);
 
+  const handleLoadingChange = value => {
+    dispatch({
+      type: 'CHANGE_LOADING',
+      loading: value
+    })
+  }
+
   const handleCategoryChange = event => {
-    setQuestionCategory(event.target.value)
+    dispatch({
+      type: 'CHANGE_CATEGORY',
+      question_category: event.target.value
+    })
   }
 
   const handleDifficultyChange = event => {
-    setQuestionDifficulty(event.target.value)
+    dispatch({
+      type: 'CHANGE_DIFFICULTY',
+      question_difficulty: event.target.value
+    })
   }
 
   const handleTypeChange = event => {
-    setQuestionType(event.target.value)
+    dispatch({
+      type: 'CHANGE_TYPE',
+      question_type: event.target.value
+    })
   }
 
   if (!loading) {
