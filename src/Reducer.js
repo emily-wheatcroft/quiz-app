@@ -6,7 +6,8 @@ const initState = {
     question_type: ``
   },
   questions: [],
-  index: 0
+  index: 0,
+  score: 0
 }
 
 const Reducer = (state = initState, action) => {
@@ -58,6 +59,12 @@ const Reducer = (state = initState, action) => {
       return {
         ...state,
         index: action.index
+      }
+    
+    case "SET_SCORE":
+      return {
+        ...state,
+        score: action.score
       }
 
     default:
