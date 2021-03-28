@@ -11,16 +11,22 @@ function App() {
 
   if (questions.length) {
     return (
-      <Question />
+      <div className="App">
+        <div className="app-container">
+          <Question />
+        </div>
+      </div>
     )
   }
 
   if (!questions.length) {
     return (
       <div className="App">
-        <h1>Quiz App</h1>
-        <Settings />
-        <FetchButton />
+        <div className="app-container">
+          <h1>Quiz App</h1>
+          <Settings />
+          <FetchButton />
+        </div>
       </div>
     )
   }

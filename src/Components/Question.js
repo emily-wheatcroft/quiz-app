@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
+const decodeHTML = function (html) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 function Question() {
   const [answerSelected, setAnswerSelected] = useState(false)
   const [answerCorrect, setAnswerCorrect] = useState(null)
@@ -59,41 +65,15 @@ function Question() {
     }
   */
 
-  const handlePreviousClick = () => {
-    if (questionIndex === 0) {
-      return
-    }
-
-    dispatch({
-      type: 'SET_INDEX',
-      index: questionIndex - 1
-    })
-  }
-
-  const handleNextClick = () => {
-    if (questionIndex === 49) {
-      return
-    }
-
-    dispatch({
-      type: 'SET_INDEX',
-      index: questionIndex + 1
-    })
-  }
-
   if (!answerSelected) {
     return (
       <div>
         <p>Question {questionIndex + 1}</p>
-        <h3>{question.question}</h3>
+        <h3>{decodeHTML(question.question)}</h3>
         <ul>
-          {options.map((option, i) => <li key={i} onClick={handleListItemClick}>{option}</li>)}
+          {options.map((option, i) => <li key={i} onClick={handleListItemClick}>{decodeHTML(option)}</li>)}
         </ul>
-        <div>Score: {score} / 50</div>
-        <div>
-          <button onClick={handlePreviousClick}>Previous</button>
-          <button onClick={handleNextClick}>Next</button>
-        </div>
+        <div>Score: {score} / {questionIndex}</div>
       </div>
     )
   } else if (answerCorrect) {
