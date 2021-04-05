@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 
 import Settings from './Components/Settings';
-import FetchButton from './Components/FetchButton';
 import Question from './Components/Question';
 import FinalScreen from './Components/FinalScreen';
 
@@ -11,35 +10,23 @@ function App() {
   const questions = useSelector(state => state.questions)
   const questionIndex = useSelector(state => state.index)
 
+  let component;
+
   if (questions.length && questionIndex + 1 <= questions.length) {
-    return (
-      <div className="App">
-        <div className="app-container">
-          <Question />
-        </div>
-      </div>
-    )
+    component = <Question />
+  } else if (!questions.length) {
+    component = <Settings />
+  } else {
+    component = <FinalScreen />
   }
 
-  if (!questions.length) {
-    return (
-      <div className="App">
-        <div className="app-container">
-          <h1>Quiz App</h1>
-          <Settings />
-          <FetchButton text="Get started!" />
-        </div>
+  return (
+    <div className="App">
+      <div className="app-container">
+        {component}
       </div>
-    )
-  } else {
-    return (
-      <div className="App">
-        <div className="app-container">
-          <FinalScreen />
-        </div>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default App;

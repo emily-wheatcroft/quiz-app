@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import FetchButton from './FetchButton';
 
 function Settings() {
   const [options, setOptions] = useState(null);
@@ -64,6 +65,7 @@ function Settings() {
   if (!loading) {
     return (
       <div>
+        <h1>Quiz App</h1>
         <div>
           <h2>Select Category:</h2>
           <select value={questionCategory} onChange={handleCategoryChange}>
@@ -95,6 +97,8 @@ function Settings() {
           <h2>Amount of Questions:</h2>
           <input value={questionAmount} onChange={handleAmountChange} />
         </div>
+
+        <FetchButton text="Get started!" />
       </div>
     );
   }
