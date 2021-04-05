@@ -31,7 +31,7 @@ function Settings() {
         handleLoadingChange(false);
         setOptions(response.trivia_categories);
       });
-  }, [setOptions]);
+  }, [setOptions, dispatch]);
 
   const handleCategoryChange = event => {
     dispatch({
