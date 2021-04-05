@@ -3,7 +3,8 @@ const initState = {
     loading: false,
     question_category: ``,
     question_difficulty: ``,
-    question_type: ``
+    question_type: ``,
+    amount_of_questions: 50
   },
   questions: [],
   index: 0,
@@ -46,6 +47,15 @@ const Reducer = (state = initState, action) => {
         options: {
           ...state.options,
           question_type: action.question_type
+        }
+      }
+    
+    case "CHANGE_AMOUNT":
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          amount_of_questions: action.amount_of_questions
         }
       }
 

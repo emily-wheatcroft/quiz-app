@@ -9,11 +9,19 @@ function Settings() {
   const questionCategory = useSelector(state => state.options.question_category)
   const questionDifficulty = useSelector(state => state.options.question_difficulty)
   const questionType = useSelector(state => state.options.question_type)
+  const questionAmount = useSelector(state => state.options.amount_of_questions)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     const apiUrl = `https://opentdb.com/api_category.php`;
+
+    const handleLoadingChange = value => {
+      dispatch({
+        type: 'CHANGE_LOADING',
+        loading: value
+      })
+    }
 
     handleLoadingChange(true);
 
@@ -24,13 +32,6 @@ function Settings() {
         setOptions(response.trivia_categories);
       });
   }, [setOptions]);
-
-  const handleLoadingChange = value => {
-    dispatch({
-      type: 'CHANGE_LOADING',
-      loading: value
-    })
-  }
 
   const handleCategoryChange = event => {
     dispatch({
@@ -50,6 +51,13 @@ function Settings() {
     dispatch({
       type: 'CHANGE_TYPE',
       question_type: event.target.value
+    })
+  }
+
+  const handleAmountChange = event => {
+    dispatch({
+      type: 'CHANGE_AMOUNT',
+      amount_of_questions: event.target.value
     })
   }
 
@@ -81,6 +89,11 @@ function Settings() {
             <option value="multiple" key="type-1">Multiple Choice</option>
             <option value="boolean" key="type-2">True/False</option>
           </select>
+        </div>
+
+        <div>
+          <h2>Amount of Questions:</h2>
+          <input value={questionAmount} onChange={handleAmountChange} />
         </div>
       </div>
     );

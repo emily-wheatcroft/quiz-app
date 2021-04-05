@@ -41,15 +41,17 @@ function Question() {
       setAnswerCorrect(false)
     }
 
-    setTimeout(() => {
-      dispatch({
-        type: 'SET_INDEX',
-        index: questionIndex + 1
-      })
-
-      setAnswerSelected(false)
-      setAnswerCorrect(null)
-    }, 1000)
+    if (questionIndex + 1 <= questions.length) {
+      setTimeout(() => {
+        dispatch({
+          type: 'SET_INDEX',
+          index: questionIndex + 1
+        })
+  
+        setAnswerSelected(false)
+        setAnswerCorrect(null)
+      }, 1000)
+    }
   }
 
   /*
@@ -79,13 +81,14 @@ function Question() {
   } else if (answerCorrect) {
     return (
       <div>
-        Correct
+        <h3>Correct</h3>
       </div>
     )
   } else if (!answerCorrect) {
     return (
       <div>
-        Incorrect
+        <h3>Incorrect</h3>
+        <div>Correct answer: {decodeHTML(answer)}</div>
       </div>
     )
   }

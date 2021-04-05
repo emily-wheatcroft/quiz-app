@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-function FetchButton() {
+function FetchButton(props) {
   const questionCategory = useSelector(state => state.options.question_category)
   const questionDifficulty = useSelector(state => state.options.question_difficulty)
   const questionType = useSelector(state => state.options.question_type)
+  const questionAmount = useSelector(state => state.options.amount_of_questions)
+  const questionIndex = useSelector(state => state.index)
 
   const dispatch = useDispatch()
 
@@ -22,8 +24,9 @@ function FetchButton() {
     })
   }
 
-  const handleQuery = () => {
-    let apiUrl = `https://opentdb.com/api.php?amount=50`;
+  const handleQuery = async () => {
+    let apiUrl = `https://opentdb.com/api.php?amount=${questionAmount}`;
+
     if (questionCategory.length) {
       apiUrl = apiUrl.concat(`&category=${questionCategory}`)
     }
@@ -38,14 +41,21 @@ function FetchButton() {
 
     setLoading(true);
 
-    fetch(apiUrl)
+    await fetch(apiUrl)
       .then((res) => res.json())
       .then((response) => {
         setQuestions(response.results)
         setLoading(false);
       });
+
+      if (questionIndex > 0) {
+        dispatch({
+          type: 'SET_INDEX',
+          index: 0
+        })
+      }
   }
 
-  return <button onClick={handleQuery}>Get Started!</button>;
+  return <button onClick={handleQuery}>{props.text}</button>;
 }
 export default FetchButton;
