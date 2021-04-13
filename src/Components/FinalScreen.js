@@ -1,25 +1,34 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import FetchButton from './FetchButton';
-
+import FetchButton from './FetchButton'
 
 function FinalScreen() {
-  const score = useSelector(state => state.score)
+  const score = useSelector((state) => state.score)
 
   const dispatch = useDispatch()
 
   const replay = () => {
     dispatch({
       type: 'SET_INDEX',
-      index: 0
+      index: 0,
+    })
+
+    dispatch({
+      type: 'SET_SCORE',
+      index: 0,
     })
   }
 
   const settings = () => {
     dispatch({
       type: 'SET_QUESTIONS',
-      questions: []
+      questions: [],
+    })
+
+    dispatch({
+      type: 'SET_SCORE',
+      index: 0,
     })
   }
 
@@ -30,6 +39,6 @@ function FinalScreen() {
       <FetchButton text="Fetch new questions" />
       <button onClick={settings}>Back to settings</button>
     </div>
-  );
+  )
 }
-export default FinalScreen;
+export default FinalScreen
