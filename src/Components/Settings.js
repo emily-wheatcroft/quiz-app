@@ -77,6 +77,7 @@ function Settings() {
           <select value={questionCategory} onChange={handleCategoryChange}>
             <option>All</option>
             {options &&
+              options.length &&
               options.map((option) => (
                 <option value={option.id} key={option.id}>
                   {option.name}
