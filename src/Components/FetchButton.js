@@ -61,8 +61,8 @@ function FetchButton(props) {
       })
 
       dispatch({
-        type: 'SET_INDEX',
-        index: 0,
+        type: 'SET_SCORE',
+        score: 0,
       })
     }
   }

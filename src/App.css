@@ -156,3 +156,16 @@ select:disabled:hover,
 select[aria-disabled='true'] {
   border-color: #aaa;
 }
+
+li:hover {
+  background-color: white;
+  color: #222;
+}
+
+li.correct {
+  background-color: rgb(53, 212, 53);
+}
+
+li.selected:not(correct) {
+  background-color: rgb(206, 58, 58);
+}

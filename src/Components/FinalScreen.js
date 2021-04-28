@@ -16,7 +16,7 @@ function FinalScreen() {
 
     dispatch({
       type: 'SET_SCORE',
-      index: 0,
+      score: 0,
     })
   }
 
@@ -28,7 +28,7 @@ function FinalScreen() {
 
     dispatch({
       type: 'SET_SCORE',
-      index: 0,
+      score: 0,
     })
   }
 
