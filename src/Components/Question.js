@@ -47,7 +47,7 @@ function Question() {
     answers.splice(getRandomInt(question.incorrect_answers.length), 0, question.correct_answer)
 
     setOptions(answers)
-  }, [question && (question, question.incorrect_answers, question.correct_answer)])
+  }, [question])
 
   const handleListItemClick = (event) => {
     setAnswerSelected(true)
